@@ -1,0 +1,713 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #030014;
+
+    --color-light-100: #cecefb;
+    --color-light-200: #a8b5db;
+
+    --color-gray-100: #9ca4ab;
+
+    --color-dark-100: #0f0d23;
+
+    --font-dm-sans: DM Sans, sans-serif;
+
+    --breakpoint-xs: 480px;
+
+    --background-image-hero-pattern: url("/hero-bg.png");
+}
+
+@layer base {
+    body {
+        font-family: "DM Sans", serif;
+        font-optical-sizing: auto;
+        color: #ffffff;
+        --bs-heading-color: #ffffff;
+        min-height: 100vh;
+        background-color: #030014;
+        background-image:
+            linear-gradient(rgba(3, 0, 20, 0.78), rgba(3, 0, 20, 0.92)),
+            url("/hero-bg.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    h1 {
+        @apply mx-auto max-w-4xl text-center text-5xl font-bold leading-tight tracking-[-1%] text-white sm:text-[64px] sm:leading-[76px];
+        color: #ffffff !important;
+    }
+
+    h2 {
+        @apply text-2xl font-bold text-white sm:text-3xl;
+        color: #ffffff !important;
+    }
+
+    h3 {
+        color: #ffffff !important;
+    }
+
+    .form-control {
+        color: #212529 !important;
+        background-color: #ffffff !important;
+    }
+
+    .form-control::placeholder {
+        color: #6c757d !important;
+        opacity: 1;
+    }
+
+    .form-control:focus {
+        color: #212529 !important;
+    }
+
+    main {
+        @apply min-h-screen relative bg-primary;
+    }
+
+    header {
+        @apply sm:mt-10 mt-5;
+    }
+
+    header img {
+        @apply w-full max-w-lg h-auto object-contain mx-auto drop-shadow-md;
+    }
+}
+
+@layer components {
+    .pattern {
+        @apply bg-hero-pattern w-screen h-screen bg-center bg-cover absolute z-0;
+    }
+
+    .wrapper {
+        @apply px-5 py-12 xs:p-10 max-w-7xl mx-auto flex flex-col relative z-10;
+    }
+
+    .trending {
+        @apply mt-20;
+
+        & ul {
+            @apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;
+        }
+
+        & ul li {
+            @apply min-w-[230px] flex flex-row items-center;
+        }
+
+        & ul li p {
+            @apply fancy-text mt-[22px] text-nowrap;
+        }
+
+        & ul li img {
+            @apply w-[127px] h-[163px] rounded-lg object-cover -ml-3.5;
+        }
+    }
+
+    .search {
+        @apply w-full bg-light-100/5 px-4 py-3 rounded-lg mt-10 max-w-3xl mx-auto;
+
+        & div {
+            @apply relative flex items-center;
+        }
+
+        & img {
+            @apply absolute left-2 h-5 w-5;
+        }
+
+        & input {
+            @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
+        }
+    }
+
+    .home-header {
+        @apply px-5 pt-10 text-center;
+    }
+
+    .site-logo {
+        @apply mx-auto h-auto object-contain drop-shadow-2xl;
+    }
+
+    .home-logo {
+        @apply mb-7 w-36 sm:w-44;
+    }
+
+    .auth-page {
+        @apply min-h-screen px-5 py-10;
+    }
+
+    .auth-header {
+        @apply mx-auto mt-0 max-w-3xl text-center;
+
+        & .auth-logo {
+            @apply w-48 sm:w-56;
+        }
+
+        & h1 {
+            @apply mt-4 text-4xl leading-tight sm:text-5xl sm:leading-tight;
+        }
+
+        & p {
+            @apply mx-auto mt-3 max-w-xl text-base text-light-100 sm:text-lg;
+        }
+    }
+
+    .trivia-card {
+        @apply mx-auto max-w-4xl rounded-2xl border border-light-100/15 bg-dark-100/80 px-6 py-8 shadow-2xl backdrop-blur-md sm:px-10;
+
+        & .trivia-label {
+            @apply mb-3 text-sm font-bold uppercase tracking-[0.2em] text-yellow-300;
+        }
+
+        & .trivia-meta {
+            @apply mb-3 text-sm capitalize text-light-200;
+        }
+
+        & .trivia-question {
+            @apply max-w-3xl text-2xl leading-relaxed sm:text-3xl sm:leading-relaxed;
+        }
+
+        & .trivia-answers {
+            @apply mt-6 flex justify-center gap-4;
+        }
+
+        & .trivia-answer {
+            @apply min-w-28 rounded-xl border border-light-100/30 bg-light-100/10 px-6 py-3 font-bold text-white transition-colors hover:bg-light-100/20 disabled:cursor-default;
+
+            &.correct {
+                @apply border-green-300 bg-green-500/30 text-green-100;
+            }
+
+            &.incorrect {
+                @apply border-red-300 bg-red-500/30 text-red-100;
+            }
+        }
+
+        & .trivia-feedback {
+            @apply mt-4 font-semibold text-white;
+        }
+
+        & .trivia-next-button {
+            @apply mt-8 rounded-full border border-light-100/25 bg-light-100/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-light-100/20 disabled:cursor-not-allowed disabled:opacity-60;
+        }
+
+        & .trivia-attribution {
+            @apply mt-4 block text-xs text-light-200 underline-offset-4 hover:text-white hover:underline;
+        }
+    }
+
+    .auth-form {
+        @apply mx-auto mt-8 w-full max-w-xl rounded-2xl border border-light-100/25 bg-dark-100/90 p-6 shadow-2xl backdrop-blur-md sm:p-8;
+
+        & .form-label {
+            color: #ffffff !important;
+            @apply mb-2 text-base font-bold;
+        }
+
+        & .form-control {
+            min-height: 52px;
+            color: #111827 !important;
+            background-color: #ffffff !important;
+            border: 2px solid #c4b5fd !important;
+            @apply rounded-xl px-4 text-base font-medium shadow-sm;
+        }
+
+        & .form-control::placeholder {
+            color: #6b7280 !important;
+            opacity: 1;
+        }
+
+        & .form-control:focus {
+            color: #111827 !important;
+            border-color: #facc15 !important;
+            box-shadow: 0 0 0 4px rgba(250, 204, 21, 0.2) !important;
+        }
+
+        & .form-check-label {
+            color: #ffffff !important;
+            @apply font-semibold;
+        }
+
+        & .btn-primary {
+            @apply w-full rounded-xl py-3 font-bold shadow-lg;
+        }
+    }
+
+    .home-actions {
+        @apply mt-6 flex flex-wrap justify-center gap-3;
+    }
+
+    .nav-button {
+        @apply rounded-lg bg-white px-5 py-2.5 font-semibold text-dark-100 transition-colors hover:bg-light-100 disabled:cursor-not-allowed disabled:opacity-60;
+
+        &.secondary {
+            @apply bg-light-100/15 text-white hover:bg-light-100/25;
+        }
+    }
+
+    .logout-button {
+        @apply flex items-center gap-2 rounded-lg border border-red-300/60 bg-red-500/15 px-5 py-2.5 font-semibold text-red-100 transition-all hover:border-red-200 hover:bg-red-500/30 hover:text-white;
+
+        & svg {
+            @apply h-5 w-5;
+        }
+    }
+
+    .all-movies {
+        @apply space-y-9;
+
+        & h2 {
+            @apply flex items-center justify-between;
+
+            & .view-all {
+                @apply text-sm text-light-200 hover:text-white transition-colors;
+            }
+        }
+
+        & ul {
+            @apply grid grid-cols-1 gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+        }
+
+        & .movie-card {
+            @apply bg-dark-100 rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105;
+
+            & img {
+                @apply w-full h-[280px] object-cover;
+            }
+
+            & .content {
+                @apply p-4;
+            }
+
+            & h3 {
+                @apply text-lg font-semibold mb-2 line-clamp-1;
+            }
+
+            & .meta {
+                @apply flex items-center gap-4 text-sm text-gray-100;
+            }
+        }
+    }
+
+    .movie-card-container {
+        @apply relative cursor-pointer rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-light-100;
+    }
+
+    .movie-card {
+        @apply relative rounded-lg overflow-hidden transition-all duration-300;
+
+        &.hovered {
+            @apply scale-110 z-50 shadow-2xl;
+        }
+
+        & .poster {
+            @apply relative;
+
+            & img {
+                @apply w-full h-[400px] object-cover rounded-lg transition-transform duration-300;
+            }
+        }
+
+        & .hover-content {
+            @apply absolute inset-0 bg-gradient-to-t from-black via-dark-100/95 to-black/30 p-4 flex flex-col justify-end gap-3 opacity-0 transition-opacity duration-300;
+
+            .movie-card.hovered & {
+                @apply opacity-100;
+            }
+
+            & h3 {
+                @apply text-xl font-bold text-white line-clamp-1;
+                color: #ffffff !important;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            }
+
+            & .meta-info {
+                @apply flex items-center gap-3 text-sm text-white;
+
+                & .rating {
+                    @apply flex items-center gap-1 text-yellow-400;
+                }
+
+                & .year {
+                    @apply after:content-['•'] after:ml-3 text-white;
+                }
+
+                & .lang {
+                    @apply text-white font-semibold;
+                }
+            }
+
+            & .overview {
+                @apply text-sm text-white/90 line-clamp-3 leading-relaxed;
+            }
+
+            & .actions {
+                @apply flex items-center gap-2 mt-3;
+
+                & .details-btn {
+                    @apply bg-white text-dark-100 px-4 py-1.5 rounded-lg font-semibold transition-colors hover:bg-light-100;
+                }
+
+                & .info-btn {
+                    @apply p-1.5 rounded-full bg-dark-100/50 text-white hover:bg-dark-100/70 transition-colors;
+                }
+            }
+        }
+    }
+
+    .movie-detail-overlay {
+        @apply fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4;
+    }
+
+    .movie-detail-container {
+        @apply relative bg-dark-100 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto;
+    }
+
+    .close-button {
+        @apply absolute right-4 top-4 text-white text-3xl hover:text-gray-300 z-20;
+    }
+
+    .movie-detail-content {
+        @apply relative;
+
+        & .backdrop {
+            @apply h-[300px] w-full bg-cover bg-center relative;
+
+            &::after {
+                content: '';
+                @apply absolute inset-0 bg-gradient-to-t from-dark-100 to-transparent;
+            }
+        }
+
+        & .movie-info {
+            @apply p-6 -mt-20 relative z-10;
+        }
+
+        & .meta-info {
+            @apply flex gap-4 text-gray-100 mt-2;
+        }
+
+        & .overview {
+            @apply text-light-200 mt-4 leading-relaxed;
+        }
+
+        & .additional-info {
+            @apply mt-6 space-y-2 text-light-200;
+        }
+    }
+
+    .movie-detail-page {
+        @apply relative min-h-screen bg-dark-100 text-white;
+
+        & .backdrop {
+            @apply absolute top-0 left-0 w-full h-[75vh] bg-cover bg-center;
+
+            &::after {
+                content: '';
+                @apply absolute inset-0 bg-gradient-to-b from-black/20 via-dark-100/90 to-dark-100;
+            }
+        }
+
+        & .wrapper {
+            @apply relative z-10 pt-[45vh];
+        }
+
+        & .back-button {
+            @apply fixed top-8 left-8 z-20 text-white text-lg hover:text-gray-300 flex items-center gap-2 bg-dark-100/50 backdrop-blur-sm px-4 py-2 rounded-lg transition-all duration-300 hover:bg-dark-100/70;
+        }
+
+        & .movie-info {
+            @apply bg-dark-100 backdrop-blur-md rounded-3xl px-6 py-8 sm:px-8 sm:py-12 min-h-[50vh] shadow-2xl;
+
+            & .detail-layout {
+                @apply grid gap-8 md:grid-cols-[240px_1fr] items-start;
+            }
+
+            & .detail-poster {
+                @apply w-full max-w-[280px] mx-auto rounded-xl shadow-2xl;
+            }
+
+            & .detail-copy {
+                @apply min-w-0;
+            }
+
+            & h1 {
+                @apply text-left text-4xl sm:text-5xl max-w-none mx-0 mb-4;
+            }
+
+            & .meta-info {
+                @apply flex flex-wrap gap-3 text-white mt-4;
+            }
+
+            & .pill {
+                @apply px-4 py-1.5 rounded-full bg-light-100/15 text-white text-sm font-semibold;
+
+                &.rating {
+                    @apply flex items-center gap-1.5 bg-yellow-500/20 text-yellow-400;
+                }
+            }
+
+            & .overview {
+                @apply text-white/90 mt-8 text-lg leading-relaxed;
+            }
+
+            & .info-grid {
+                @apply grid md:grid-cols-2 gap-8 mt-8;
+
+                & h3 {
+                    @apply text-white text-xl font-semibold mb-4;
+                }
+            }
+
+            & .tag {
+                @apply px-3 py-1.5 rounded-lg bg-light-100/15 text-white text-sm font-medium;
+            }
+
+            & .genre-list {
+                @apply flex flex-wrap gap-2;
+            }
+
+            & .details-list {
+                @apply space-y-3;
+
+                & div {
+                    @apply flex justify-between gap-4 border-b border-white/10 pb-2;
+                }
+
+                & dt {
+                    @apply text-light-100;
+                }
+
+                & dd {
+                    @apply text-white font-semibold text-right;
+                }
+            }
+
+            & .watchlist-button {
+                @apply mt-8 rounded-lg bg-white px-5 py-3 font-semibold text-dark-100 transition-colors hover:bg-light-100;
+
+                &.saved {
+                    @apply bg-light-100/15 text-white hover:bg-red-500/30;
+                }
+
+                &:disabled {
+                    @apply cursor-not-allowed opacity-60;
+                }
+            }
+
+            & .watchlist-error {
+                @apply mt-3 text-sm font-medium text-red-300;
+            }
+
+            & .cast-list {
+                @apply flex flex-wrap gap-4;
+            }
+
+            & .cast-item {
+                @apply flex flex-col items-center gap-2 text-center;
+
+                & span {
+                    @apply text-sm text-light-200 max-w-[100px] truncate;
+                }
+            }
+
+            & .similar-movies {
+                @apply mt-16;
+
+                & h2 {
+                    @apply text-2xl font-bold mb-6;
+                }
+            }
+
+            & .similar-grid {
+                @apply grid grid-cols-2 md:grid-cols-4 gap-6;
+            }
+
+            & .similar-movie-card {
+                @apply cursor-pointer transition-transform duration-300 hover:scale-105;
+
+                & h4 {
+                    @apply text-white font-semibold mt-3 line-clamp-1;
+                }
+
+                & span {
+                    @apply text-sm text-gray-100;
+                }
+            }
+        }
+    }
+
+    .watchlist-page {
+        @apply min-h-screen bg-transparent;
+    }
+
+    .watchlist-header {
+        @apply mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between;
+
+        & h1 {
+            @apply m-0 max-w-none text-left text-4xl sm:text-5xl;
+        }
+
+        & .eyebrow {
+            @apply mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-light-100;
+        }
+    }
+
+    .watchlist-entry {
+        @apply flex flex-col gap-3;
+    }
+
+    .watchlist-editor {
+        @apply space-y-3 rounded-xl border border-light-100/20 bg-dark-100/90 p-4;
+
+        & label {
+            @apply block text-sm font-semibold text-white;
+        }
+
+        & select,
+        & input,
+        & textarea {
+            @apply mt-1.5 w-full rounded-lg border border-light-100/30 bg-primary/80 px-3 py-2 text-white outline-none transition-colors focus:border-yellow-300;
+        }
+
+        & textarea {
+            @apply resize-y;
+        }
+    }
+
+    .save-watchlist-button {
+        @apply w-full rounded-lg bg-light-100 px-4 py-2 font-semibold text-dark-100 transition-colors hover:bg-white disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .remove-button {
+        @apply w-full rounded-lg bg-red-500/20 px-4 py-2 font-semibold text-red-100 transition-colors hover:bg-red-500/35 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .empty-watchlist {
+        @apply mx-auto mt-16 max-w-xl rounded-2xl bg-dark-100/95 p-10 text-center shadow-2xl;
+
+        & p {
+            @apply mb-6 mt-3 text-light-100;
+        }
+    }
+
+    .watchlist-message {
+        @apply mb-6 rounded-lg px-4 py-3;
+
+        &.error {
+            @apply bg-red-500/20 text-red-100;
+        }
+    }
+
+    .reviews-section {
+        @apply mt-12 grid gap-8 border-t border-white/15 pt-10 lg:grid-cols-2;
+
+        & .eyebrow {
+            @apply mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-light-100;
+        }
+
+        & h2 {
+            @apply mb-6 text-3xl;
+        }
+    }
+
+    .review-form-panel,
+    .review-list-panel {
+        @apply rounded-2xl border border-light-100/15 bg-primary/55 p-6;
+    }
+
+    .review-form {
+        @apply space-y-4;
+
+        & label {
+            @apply block font-semibold text-white;
+        }
+
+        & select,
+        & textarea {
+            @apply mt-2 w-full rounded-xl border border-light-100/30 bg-dark-100 px-4 py-3 text-white outline-none transition-colors focus:border-yellow-300;
+        }
+
+        & textarea {
+            @apply resize-y;
+        }
+    }
+
+    .review-form-actions {
+        @apply flex flex-wrap gap-3 pt-2;
+    }
+
+    .review-submit-button {
+        @apply rounded-lg bg-white px-5 py-2.5 font-semibold text-dark-100 transition-colors hover:bg-light-100 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .review-delete-button {
+        @apply rounded-lg bg-red-500/20 px-5 py-2.5 font-semibold text-red-100 transition-colors hover:bg-red-500/35 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+
+    .review-message {
+        @apply mt-4 rounded-lg px-4 py-3 text-sm font-semibold;
+
+        &.error {
+            @apply bg-red-500/20 text-red-100;
+        }
+
+        &.success {
+            @apply bg-green-500/20 text-green-100;
+        }
+    }
+
+    .review-list {
+        @apply space-y-4;
+
+        & li {
+            @apply rounded-xl border border-white/10 bg-dark-100/80 p-4;
+        }
+
+        & p {
+            @apply mt-3 whitespace-pre-wrap text-white/90;
+        }
+
+        & small {
+            @apply mt-3 block text-light-200;
+        }
+    }
+
+    .review-heading {
+        @apply flex flex-wrap items-center justify-between gap-3;
+
+        & strong {
+            @apply break-all text-white;
+        }
+
+        & span {
+            @apply font-semibold text-yellow-300;
+        }
+    }
+
+    .no-reviews {
+        @apply text-light-200;
+    }
+}
+
+@utility text-gradient {
+    @apply bg-linear-to-r from-[#D6C7FF] to-[#AB8BFF] bg-clip-text text-transparent;
+}
+
+@utility fancy-text {
+    -webkit-text-stroke: 5px rgba(206, 206, 251, 0.5);
+    font-size: 190px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+@utility hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
